@@ -1,0 +1,16 @@
+{ "name": "messageformat-bundle"
+, "version": "0.0.0"
+, "description": "Compile a tree of messages with messageformat.js. No globals in the output."
+, "license": "MIT"
+
+, "contributors":
+  [ { "name": "Tomek Wiszniewski"
+    , "email": "t.wiszniewski@gmail.com"
+    }
+  ]
+
+, "repository":
+  { "type": "git"
+  , "url": "https://github.com/tomekwi/messageformat-bundle.git"
+  }
+}

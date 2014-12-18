@@ -31,10 +31,11 @@ var self = function messageformatBundle (messages, options) {
         + 'If you provide `options.formatting`, it must be a function.'
         );
 
-    // Instantiate MessageFormat.
+    // Instantiate a clean MessageFormat.
+    MessageFormat.locale = {};
     mf = new MessageFormat(locale, customPlurals);
 
-    // Compile message functions.
+    // Compile messages.
     compiledMessages = mapObjectRecursive(messages, function (key, message) {
         return [key, evalExpression
             ( mf.precompile(mf.parse(message))

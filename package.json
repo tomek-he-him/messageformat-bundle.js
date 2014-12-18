@@ -13,4 +13,11 @@
   { "type": "git"
   , "url": "https://github.com/tomekwi/messageformat-bundle.git"
   }
+
+, "dependencies":
+  { "eval-expression": "~0.1.0"
+  , "map-object-recursive": "~0.0.1"
+  , "messageformat": "~0.2.1"
+  , "tosource": "~0.1.3"
+  }
 }

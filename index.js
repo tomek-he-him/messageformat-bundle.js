@@ -1,10 +1,12 @@
+'use strict';
+
 var mapObjectRecursive = require('map-object-recursive');
 var MessageFormat = require('messageformat');
 var toSource = require('tosource');
 var evalExpression = require('eval-expression');
 
 
-var self = function messageformatBundle (messages, options) { 'use strict';
+var self = function messageformatBundle (messages, options) {
     var mf, compiledMessages;
 
     // Validate arguments.
@@ -44,7 +46,7 @@ var self = function messageformatBundle (messages, options) { 'use strict';
 
 
 self.formatting =
-    { asExpression: function asExpression (compiledMessages, mf) { 'use strict';
+    { asExpression: function asExpression (compiledMessages, mf) {
         return (
             ( '(function(){'
             +   'var ' + mf.globalName + '='
@@ -57,7 +59,7 @@ self.formatting =
             ));
         }
 
-    , custom: function customMaker (options) { 'use strict';
+    , custom: function customMaker (options) {
         var header = ''+ options.header;
         var footer = ''+ options.footer;
         var base = ( typeof options.base == 'function'
@@ -71,7 +73,7 @@ self.formatting =
             ));};
         }
 
-    , asVariable: function asVariableMaker (name) { 'use strict';
+    , asVariable: function asVariableMaker (name) {
         return self.formatting.custom(
             { header: 'var ' + name + ' = '
             , footer: ';'
@@ -85,13 +87,13 @@ self.formatting =
     };
 
 
-var MessageformatBundle = function MessageformatBundle (contents) { 'use strict';
+var MessageformatBundle = function MessageformatBundle (contents) {
     this.contents = contents;
     };
-MessageformatBundle.prototype.toString = function toString () { 'use strict';
+MessageformatBundle.prototype.toString = function toString () {
     return this.contents;
     };
-MessageformatBundle.prototype.toBuffer = function toBuffer () { 'use strict';
+MessageformatBundle.prototype.toBuffer = function toBuffer () {
     return new Buffer(this.contents);
     };
 

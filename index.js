@@ -59,6 +59,18 @@ self.formatting =
             ));
         }
 
+    , get asModule () { return self.formatting.custom(
+        { header: 'export default '
+        , footer: ';'
+        });}
+
+    , asVariable: function asVariableMaker (name) {
+        return self.formatting.custom(
+            { header: 'var ' + name + ' = '
+            , footer: ';'
+            });
+        }
+
     , custom: function customMaker (options) {
         var header = ''+ options.header;
         var footer = ''+ options.footer;
@@ -72,18 +84,6 @@ self.formatting =
             + footer
             ));};
         }
-
-    , asVariable: function asVariableMaker (name) {
-        return self.formatting.custom(
-            { header: 'var ' + name + ' = '
-            , footer: ';'
-            });
-        }
-
-    , asModule: self.formatting.custom(
-        { header: 'export default '
-        , footer: ';'
-        })
     };
 
 

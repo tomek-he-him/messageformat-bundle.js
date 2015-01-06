@@ -1,8 +1,6 @@
 'use strict';
 
-var asArray = require('as/array');
 var asObject = require('as/object');
-var mapDeep = require('map-deep');
 var MessageFormat = require('messageformat');
 var toSource = require('tosource');
 var evalExpression = require('eval-expression');
@@ -38,10 +36,13 @@ var self = function messageformatBundle (messages, options) {
     mf = new MessageFormat(locale, customPlurals);
 
     // Compile messages.
-    compiledMessages = asObject(mapDeep(asArray(messages), function (message) { return (
-        { key: message.key
-        , value: evalExpression(mf.precompile(mf.parse(message.value)))
-        }); }));
+    compiledMessages = asObject(messages
+        , function (message, key) { return (
+            { key: key
+            , value: evalExpression(mf.precompile(mf.parse(message)))
+            }); }
+        , {depth: Infinity}
+        );
 
     // Bundle the compiled messages.
     bundledMessages = formatting(compiledMessages, mf);

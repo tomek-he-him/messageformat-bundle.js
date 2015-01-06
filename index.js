@@ -7,10 +7,10 @@ var evalExpression = require('eval-expression');
 
 
 var self = function messageformatBundle (messages, options) {
-    var mf, compiledMessages;
+    var mf, compiledMessages, bundledMessages;
 
     // Validate arguments.
-    if (typeof messages != 'object') throw new Error
+    if (typeof messages != 'object') throw new TypeError
         ( 'messageformat-bundle: '
         + 'The argument `messages` must be an Object.'
         );
@@ -22,11 +22,11 @@ var self = function messageformatBundle (messages, options) {
     var formatting = options.formatting || self.formatting.asModule;
 
     // Validate options.
-    if (customPlurals && typeof customPlurals != 'function') throw new Error
+    if (customPlurals && typeof customPlurals != 'function') throw new TypeError
         ( 'messageformat-bundle: '
         + 'If you provide `options.customPlurals`, it must be a function.'
         );
-    if (typeof formatting != 'function') throw new Error
+    if (typeof formatting != 'function') throw new TypeError
         ( 'messageformat-bundle: '
         + 'If you provide `options.formatting`, it must be a function.'
         );
@@ -42,6 +42,14 @@ var self = function messageformatBundle (messages, options) {
             )];
         });
 
+    // Bundle the compiled messages.
+    bundledMessages = formatting(compiledMessages, mf);
+    if (typeof bundledMessages != 'string') throw new TypeError
+        ( 'messageformat-bundle: '
+        + "The function `options.formatting` must return a string. If you're using one of our "
+        + "shipped formatting functions, make sure you shouldn't initialize it before passing it "
+        + "through `options`."
+        );
     return new MessageformatBundle(formatting(compiledMessages, mf));
     };
 

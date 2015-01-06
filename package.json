@@ -1,5 +1,5 @@
 { "name": "messageformat-bundle"
-, "version": "0.0.2"
+, "version": "0.0.3"
 , "description": "Compile a tree of messages with messageformat.js. No globals in the output."
 , "license": "MIT"
 

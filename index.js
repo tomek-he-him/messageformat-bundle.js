@@ -1,6 +1,8 @@
 'use strict';
 
-var mapObjectRecursive = require('map-object-recursive');
+var asArray = require('as/array');
+var asObject = require('as/object');
+var mapDeep = require('map-deep');
 var MessageFormat = require('messageformat');
 var toSource = require('tosource');
 var evalExpression = require('eval-expression');
@@ -36,11 +38,10 @@ var self = function messageformatBundle (messages, options) {
     mf = new MessageFormat(locale, customPlurals);
 
     // Compile messages.
-    compiledMessages = mapObjectRecursive(messages, function (key, message) {
-        return [key, evalExpression
-            ( mf.precompile(mf.parse(message))
-            )];
-        });
+    compiledMessages = asObject(mapDeep(asArray(messages), function (message) { return (
+        { key: message.key
+        , value: evalExpression(mf.precompile(mf.parse(message.value)))
+        }); }));
 
     // Bundle the compiled messages.
     bundledMessages = formatting(compiledMessages, mf);

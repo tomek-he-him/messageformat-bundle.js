@@ -34,24 +34,24 @@ API
 
 ### messageformatBundle(messages, [options])
 
-#### messages
+##### messages
 > Type: `Object`  
 > Required
 
 
-#### options.locale
+##### options.formatting
+> Type: `Function`  
+> Default: `messageformatBundle.formatting.asModule`
+
+
+##### options.locale
 > Type: `String`  
 > Default: `undefined`
 
 
-#### options.customPlurals
+##### options.customPlurals
 > Type: `Function`  
 > Default: `undefined`
-
-
-#### options.formatting
-> Type: `Function`  
-> Default: `messageformatBundle.formatting.asModule`
 
 _Work in progress…_
 
